@@ -149,18 +149,20 @@ class _HomePageState extends State<HomePage> {
                 homeController.isGettingCurrentPositionInit.value
                     ? LinearProgressIndicator()
                     : Expanded(
-                        child: GoogleMap(
-                          mapType: MapType.normal,
-                          initialCameraPosition:
-                              homeController.currentCameraPosition!,
-                          onMapCreated: (GoogleMapController controller) {
-                            homeController.gMapController.value
-                                .complete(controller);
-                          },
-                          zoomControlsEnabled: false,
-                          myLocationButtonEnabled: false,
-                          myLocationEnabled: true,
-                          markers: Set<Marker>.of(homeController.markers),
+                        child: Obx(
+                          () => GoogleMap(
+                            mapType: MapType.normal,
+                            initialCameraPosition:
+                                homeController.currentCameraPosition!,
+                            onMapCreated: (GoogleMapController controller) {
+                              homeController.gMapController.value
+                                  .complete(controller);
+                            },
+                            zoomControlsEnabled: false,
+                            myLocationButtonEnabled: false,
+                            myLocationEnabled: true,
+                            markers: Set<Marker>.of(homeController.markers),
+                          ),
                         ),
                       ),
               ],

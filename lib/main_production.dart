@@ -15,7 +15,8 @@ Future<void> main() async {
   FlavorConfig(
       flavor: Flavor.PRODUCTION,
       color: Colors.deepPurpleAccent,
-      values:
-          FlavorValues(baseUrl: 'https://staging.api.locq.com/ms-profile/'));
+      values: FlavorValues(
+        baseUrl: 'https://staging.api.locq.com',
+      ));
   runApp(MyApp());
 }

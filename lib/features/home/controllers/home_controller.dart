@@ -1,4 +1,7 @@
 import 'dart:async';
+import 'package:flutter/services.dart' show rootBundle;
+import 'dart:ui' as ui;
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -8,6 +11,7 @@ import 'package:http/http.dart' as http;
 import 'package:seaoil/core/services/api.dart';
 import 'package:seaoil/core/utils/generic_exception.dart';
 import 'package:seaoil/features/home/models/gas_stations_list.dart';
+import 'package:seaoil/gen/assets.gen.dart';
 
 class HomeController extends GetxController {
   RxBool isGettingCurrentPositionInit = false.obs;
@@ -23,12 +27,17 @@ class HomeController extends GetxController {
 
   RxList<Station> searchResultStations = RxList<Station>();
 
+  // final Future<Uint8List> customMarker = getBytesFromAsset(
+  //   path: Assets.images.logo.path,
+  //   width: 50,
+  // );
+
   Rx<Completer<GoogleMapController>> gMapController =
       Rx<Completer<GoogleMapController>>(Completer<GoogleMapController>());
 
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
-  List<Marker> markers = <Marker>[];
+  RxList<Marker> markers = RxList<Marker>();
 
   final CameraPosition kGooglePlex = CameraPosition(
     target: LatLng(37.42796133580664, -122.085749655962),
@@ -87,7 +96,7 @@ class HomeController extends GetxController {
     );
 
     getGasStations = getStationList(
-        page: 1, perPage: 10, isPlcOnboarded: true, platformType: 'plc');
+        page: 1, perPage: 288, isPlcOnboarded: true, platformType: 'plc');
 
     isGettingCurrentPositionInit.value = false;
   }
@@ -158,16 +167,27 @@ class HomeController extends GetxController {
   }
 
   void generateMarkers() {
-    for (Station s in gasStations.value.gasStationData!.stations!) {
+    gasStations.value.gasStationData!.stations!.forEach((Station s) {
       markers.add(Marker(
         markerId: MarkerId(s.name!),
         position: LatLng(s.latitude!, s.longitude!),
-        infoWindow: InfoWindow(
-          title: s.name!,
-          snippet: s.address!,
-        ),
+        onTap: () {
+          selectedGasStation.value = s;
+          searchState.value = false;
+          detailState.value = true;
+        },
       ));
-    }
+    });
+    // for (Station s in gasStations.value.gasStationData!.stations!) {
+    //   markers.add(Marker(
+    //     markerId: MarkerId(s.name!),
+    //     position: LatLng(s.latitude!, s.longitude!),
+    //     infoWindow: InfoWindow(
+    //       title: s.name!,
+    //       snippet: s.address!,
+    //     ),
+    //   ));
+    // }
     print('markers: $markers');
   }
 
@@ -180,5 +200,16 @@ class HomeController extends GetxController {
         }
       });
     }
+  }
+
+  Future<Uint8List> getBytesFromAsset(
+      {required String path, required int width}) async {
+    ByteData data = await rootBundle.load(path);
+    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(),
+        targetWidth: width);
+    ui.FrameInfo fi = await codec.getNextFrame();
+    return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!
+        .buffer
+        .asUint8List();
   }
 }

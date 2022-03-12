@@ -16,7 +16,7 @@ Future<void> main() async {
       flavor: Flavor.BETA,
       color: Colors.deepPurpleAccent,
       values: FlavorValues(
-          baseUrl:
-              'https://staging.api.locq.com/ms-profile/'));
+        baseUrl: 'https://staging.api.locq.com',
+      ));
   runApp(MyApp());
 }
