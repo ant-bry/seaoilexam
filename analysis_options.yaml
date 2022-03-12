@@ -1,0 +1,76 @@
+# This file configures the analyzer, which statically analyzes Dart code to
+# check for errors, warnings, and lints.
+#
+# The issues identified by the analyzer are surfaced in the UI of Dart-enabled
+# IDEs (https://dart.dev/tools#ides-and-editors). The analyzer can also be
+# invoked from the command line by running `flutter analyze`.
+
+# The following line activates a set of recommended lints for Flutter apps,
+# packages, and plugins designed to encourage good coding practices.
+# include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  exclude:
+    - test/firebase_mock.dart
+
+linter:
+  # The lint rules applied to this project can be customized in the
+  # section below to disable rules from the `package:flutter_lints/flutter.yaml`
+  # included above or to enable additional rules. A list of all available lints
+  # and their documentation is published at
+  # https://dart-lang.github.io/linter/lints/index.html.
+  #
+  # Instead of disabling a lint rule for the entire project in the
+  # section below, it can also be suppressed for a single line of code
+  # or a specific dart file by using the `// ignore: name_of_lint` and
+  # `// ignore_for_file: name_of_lint` syntax on the line or in the file
+  # producing the lint.
+  rules:
+    # avoid_print: false  # Uncomment to disable the `avoid_print` rule
+    #Core:
+    prefer_single_quotes: true # Uncomment to enable the `prefer_single_quotes` rule
+    avoid_relative_lib_imports: true # Uncomment to enable 'relative imports for files in lib/.'
+    avoid_returning_null_for_future: true #Avoid returning null for Future.
+    avoid_returning_null: true #Avoit returning null from members whose return type is bool, double, int, or num.
+    null_closures: true
+    empty_statements: true # Do Not Uncomment.
+    unnecessary_statements: true # Do Not Uncomment.
+    use_key_in_widget_constructors: true #Do Not Uncomment.
+    always_put_required_named_parameters_first: true
+    #Loops
+    prefer_foreach: true
+
+    # Equality/Boolean
+    unrelated_type_equality_checks: true #DON'T Compare references of unrelated types for equality.
+    invariant_booleans: true #Do Not Uncomment.
+
+    #List Related
+    no_adjacent_strings_in_list: true #Missing Commans in List of Strings.
+    prefer_is_empty: true 
+
+    #Styling Rules
+    always_declare_return_types: true
+    always_specify_types: true
+    avoid_positional_boolean_parameters: true # Removes ambiguity in parameters.
+    avoid_returning_null_for_void: true # To have a consistent way you should not return null and only use an empty return.
+    avoid_unnecessary_containers: true #Wrapping a widget in Container with no other parameters set has no effect and makes code needlessly more complex.
+    camel_case_extensions: true #CamelCase on All Extensions
+    constant_identifier_names: true #lowerCamelCase on ConstantNames 
+    cascade_invocations: true #Use Cascade ".." on same reference.
+    empty_catches: true  #Dont Use Empty Catches.
+    curly_braces_in_flow_control_structures: true #Required Curly Braces for control flow.
+    implementation_imports: true #DO NOT import implementation files from another package. Refer to https://dart-lang.github.io/linter/lints/implementation_imports.html
+    join_return_with_assignment: true #For Readability join return statement with assignment when possible.
+    directives_ordering: true #place dart: imports before other imports.
+    lines_longer_than_80_chars: true 
+    sized_box_for_whitespace: true #Affects performance when switching to sizedbox from containers since sizedbox is lighter. 
+    sized_box_shrink_expand: true # Use shrink and expanded when the named constructors capture the intent of the code more succinctly.
+    sort_child_properties_last : true # Enforeces & Sort child properties last in widget instance creations. This improves readability and plays nicest with UI.
+    # Removed conflict on Getx Get.to Future
+    # unawaited_futures: true #Forces Dev to Declare all explicitly unawaited futures if needed. 
+
+    # Futures
+    await_only_futures: false #To Be Discussed
+    avoid_void_async: true #When declaring an async method or function which does not return a value, declare that it returns Future and not just void.
+# Additional information about this file can be found at
+# https://dart.dev/guides/language/analysis-options

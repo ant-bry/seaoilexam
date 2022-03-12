@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Reference: https://flatuicolors.com/palette/gb -->
+
+    <!-- Blue -->
+    <color name="darkBlue">#273c75</color>
+    <color name="deepBlue">#192a56</color>
+
+    <!-- Red -->
+    <color name="red">#e84118</color>
+    <color name="deepRed">#c23616</color>
+
+    <!-- Green -->
+    <color name="green">#4cd137</color>
+    <color name="deepGreen">#44bd32</color>
+
+    <!-- Black -->
+    <color name="designBlack">#1F1F1F</color>
+    <color name="black">#353b48</color>
+    <color name="deepBlack">#2f3640</color>
+
+    <!-- Brown -->
+    <color name="brown">#A58154</color>
+    <color name="deepBlack">#2f3640</color>
+
+    <!-- Yellow -->
+    <color name="yellow">#fbc531</color>
+    <color name="deepYellow">#e1b12c</color>
+
+    <!-- Grey -->
+    <color name="lightGrey">#f5f6fa</color>
+    <color name="grey">#dcdde1</color>
+    <color name="darkGrey">#7f8fa6</color>
+    <color name="deepGrey">#718093</color>
+
+    <!-- Purple -->
+    <color name="deepPurple">#7D37C4</color>
+    
+
+</resources>
